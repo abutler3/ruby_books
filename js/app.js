@@ -129,5 +129,41 @@ App.Book.FIXTURES = [
       rating: 3,
       genre: 1,
       amazon_id: '1934356379'
+    },
+    {
+      id: 11,
+      title: 'Metaprogramming Ruby 2: Program Like the Ruby Pros',
+      author: 'Paolo Perrotta',
+      review: 'Another book on the todo list. I picked up Pragmatic Programmers video series on metaprogramming and it was a good watch.',
+      rating: 3,
+      genre: 1,
+      amazon_id: '1941222129'
+    },
+    {
+      id: 12,
+      title: 'Computer Science Programming Basics in Ruby',
+      author: 'Ophir Frieder',
+      review: 'One thing about the dev bootcamp-type experience: it did not go deeply into basics of computer programming. This is a like a basic computer science textbook with Ruby based examples.',
+      rating: 4,
+      genre: 1,
+      amazon_id: '1449355978'
+    },
+    {
+      id: 13,
+      title: 'Beginning Rails 4 (Expert\'s Voice in Web Development)',
+      author: 'Adam Gamble',
+      review: 'This is another tutorial book that takes you through the basics of building a blog in Rails. Covers Rails 4 and it\'s very clear. Great for a beginner or someone who needs a refresher.',
+      rating: 5,
+      genre: 2,
+      amazon_id: '1430260343'
+    },
+    {
+      id: 14,
+      title: 'Programming Problems in Ruby',
+      author: 'Bradley Green',
+      review: 'Great book to run through interview questions in Ruby. Shows you how to answer potential techincal interview questions in Ruby',
+      rating: 5,
+      genre: 2,
+      amazon_id: '1492141119'
     }
 ];
