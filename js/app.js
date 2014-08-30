@@ -44,7 +44,7 @@ App.Book = DS.Model.extend({
   author: DS.attr(),
   review: DS.attr(),
   rating: DS.attr(),
-  genre: DS.attr(),
+  genre: DS.belongsTo('genre'),
   amazon_id: DS.attr(),
   url: function() {
     return "http://www.amazon.com/dp/"+this.get('amazon_id');
@@ -142,7 +142,7 @@ App.Book.FIXTURES = [
       author: 'David Chelimsky',
       review: 'One of the few books written about Rspec. For that alone, it is worth picking up. It is a touch outdated. But it covers the same basic concepts of BDD and TDD.',
       rating: 3,
-      genre: 1,
+      genre: 3,
       amazon_id: '1934356379'
     },
     {
@@ -180,5 +180,29 @@ App.Book.FIXTURES = [
       rating: 5,
       genre: 2,
       amazon_id: '1492141119'
+    }
+];
+
+App.Genre = DS.Model.extend({
+  name: DS.attr(),
+  books: DS.hasMany('book')
+});
+
+
+App.Genre.FIXTURES = [
+    {
+      id: 1,
+      name: 'code examples',
+      books: [1,2,4,5,6,8,9,11,12]
+    },
+    {
+      id: 2,
+      name: 'walkthroughs',
+      books: [3,7,13,14]
+    },
+    {
+      id: 3,
+      name: 'testing',
+      books: [10]
     }
 ];
