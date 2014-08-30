@@ -13,9 +13,10 @@ App.IndexRoute = Ember.Route.extend({
   }
 });
 
+//Works as default so this is optional
 App.BookRoute = Ember.Route.extend({
   model: function(params) {
-    return this.store.find('book, param.book_id');
+    return this.store.find('book', params.book_id);
   }
 });
 
