@@ -20,8 +20,22 @@ App.BookRoute = Ember.Route.extend({
   }
 });
 
+App.BooksController = Ember.ArrayController.extend({
+  // Every item in this books array has a title and we should sort by it
+  sortProperties: ['title']
+});
+
 App.ApplicationAdapter = DS.FixtureAdapter.extend({
 
+});
+
+App.BookDetailsComponent = Ember.Component.extend({
+  // extending a component, for example, by adding a class
+  // Give the class whatever this function (ratingClass) returns
+  classNameBindings: ['ratingClass'],
+  ratingClass: function() {
+    return "rating-" + this.get('book.rating');
+  }.property('book.rating')
 });
 
 // Creating a model

@@ -21,10 +21,16 @@
       <li class='active'>Books</li>
     </ol>
     <ul class="list-unstyled">
+      <!-- Render the books controller and the books template -->
+      <!-- And use the current model as its mode (this)-->
+      {{render 'books' this}}
+    </ul>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="books">
     {{#each}}
       {{book-details book=this tag='li' class='row'}}
     {{/each}}
-    </ul>
   </script>
 
   <script type="text/x-handlebars" data-template-name="book">
