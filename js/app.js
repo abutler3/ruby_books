@@ -9,8 +9,28 @@ App.Router.map(function() {
 //IndexRoute is the homepage
 App.IndexRoute = Ember.Route.extend({
   model: function() {
-    return this.store.findAll('book');
+    // specifies two models in index
+    // RSVP object = until everyone has RSVPed, don't finalize it
+    return Ember.RSVP.hash({
+      books: this.store.findAll('book'),
+      genres: this.store.findAll('genre')
+    });
+    // return this.store.findAll('book');
+  },
+  // Return what has been found in model
+  setupController: function(controller, model) {
+    // Take the model, set the array of books on controller as model
+    // Here we want to set books as model.books with a books key and
+    // a genres key
+    controller.set('books', model.books);
+    controller.set('genres', model.genres);
   }
+});
+
+// If include an RSVP, you need to give it a controller
+// Because before it was probably using ObjectController
+// so I had to be a little more explicit
+App.IndexController = Ember.Controller.extend({
 });
 
 //Works as default so this is optional
@@ -23,6 +43,11 @@ App.BookRoute = Ember.Route.extend({
 App.BooksController = Ember.ArrayController.extend({
   // Every item in this books array has a title and we should sort by it
   sortProperties: ['title']
+});
+
+App.GenresController = Ember.ArrayController.extend({
+  // Every item in this books array has a title and we should sort by it
+  sortProperties: ['name']
 });
 
 App.ApplicationAdapter = DS.FixtureAdapter.extend({
