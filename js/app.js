@@ -3,7 +3,7 @@ App = Ember.Application.create();
 App.Router.map(function() {
   // put your routes here
   this.resource('book', { path: '/books/:book_id'} )
-
+  this.resource('genre', { path: '/genres/:genre_id'} )
 });
 
 //IndexRoute is the homepage
@@ -210,7 +210,7 @@ App.Book.FIXTURES = [
 
 App.Genre = DS.Model.extend({
   name: DS.attr(),
-  books: DS.hasMany('book')
+  books: DS.hasMany('book', {async: true})
 });
 
 

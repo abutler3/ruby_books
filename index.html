@@ -36,6 +36,8 @@
     <ul class="list-unstyled">
       {{#each}}
         {{book-details book=this tag='li' class='row'}}
+      {{else}}
+        <li>There are no books</li>
       {{/each}}
     </ul>
   </script>
@@ -44,10 +46,20 @@
     <h2>Genres</h2>
     <ul class="list-unstyled">
       {{#each}}
-        <li>{{name}}</li>
+        <li>{{#link-to 'genre' this class='label label-primary'}}{{name}}{{/link-to}}</li>
       {{/each}}
     </ul>
   </script>
+
+  <script type="text/x-handlebars" data-template-name="genre">
+    <ol class='breadcrumb'>
+      <li>{{#link-to 'index'}}Books{{/link-to}}</li>
+      <li class='active'>{{name}}</li>
+    </ol>
+
+    {{render 'books' model.books}}
+  </script>
+
 
   <script type="text/x-handlebars" data-template-name="book">
       <ol class='breadcrumb'>
@@ -73,8 +85,8 @@
         <p>{{book.review}}</p>
       </div>
 
-      <span class="label label-primary">
-      {{book.genre.name}}
+      <span>
+      {{#link-to 'genre' book.genre class='label label-primary'}}{{book.genre.name}}{{/link-to}}
       </span>
     </div>
   </script>
