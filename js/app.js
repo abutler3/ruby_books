@@ -4,6 +4,9 @@ App.Router.map(function() {
   // put your routes here
   this.resource('book', { path: '/books/:book_id'} )
   this.resource('genre', { path: '/genres/:genre_id'} )
+  this.resource('reviews', function() {
+    this.route('new');
+  });
 });
 
 //IndexRoute is the homepage
@@ -52,6 +55,41 @@ App.GenresController = Ember.ArrayController.extend({
 
 App.ApplicationAdapter = DS.FixtureAdapter.extend({
 
+});
+
+App.ReviewsNewRoute = Ember.Route.extend({
+  // Model is setting the title property on book
+  model: function() {
+    // specifies two models in index
+    // RSVP object = until everyone has RSVPed, don't finalize it
+    return Ember.RSVP.hash({
+      book: this.store.createRecord('book'),
+      // Getting an array of genres
+      genres: this.store.findAll('genre')
+    });
+    // return this.store.findAll('book');
+  },
+  // Return what has been found in model
+  setupController: function(controller, model) {
+    // Take the model, set the array of books on controller as model
+    // Here we want to set books as model.books with a books key and
+    // a genres key
+    controller.set('model', model.book);
+    // Setting them on the controller
+    controller.set('genres', model.genres);
+  }
+});
+
+App.ReviewsNewController = Ember.Controller.extend({
+  ratings: [5, 4, 3, 2, 1],
+  actions: {
+    createReview: function() {
+      var controller = this;
+      this.get('model').save().then(function() {
+        controller.transitionToRoute('index');
+      });
+    }
+  }
 });
 
 App.BookDetailsComponent = Ember.Component.extend({
