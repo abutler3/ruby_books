@@ -77,6 +77,17 @@ App.ReviewsNewRoute = Ember.Route.extend({
     controller.set('model', model.book);
     // Setting them on the controller
     controller.set('genres', model.genres);
+  },
+  actions: {
+    willTransition: function(transition) {
+      if(this.currentModel.book.get('isNew')) {
+        if(confirm("Are you sure?")) {
+          this.currentModel.book.destroyRecord();
+        } else {
+          transition.abort();
+        }
+      }
+    }
   }
 });
 
