@@ -53,8 +53,8 @@ App.GenresController = Ember.ArrayController.extend({
   sortProperties: ['name']
 });
 
-App.ApplicationAdapter = DS.FixtureAdapter.extend({
-
+App.ApplicationAdapter = DS.FirebaseAdapter.extend({
+  firebase: new Firebase("https://glaring-fire-7125.firebaseio.com")
 });
 
 App.ReviewsNewRoute = Ember.Route.extend({
@@ -96,8 +96,13 @@ App.ReviewsNewController = Ember.Controller.extend({
   actions: {
     createReview: function() {
       var controller = this;
-      this.get('model').save().then(function() {
-        controller.transitionToRoute('index');
+      this.get('model').save().then(function(model) {
+        var genre = model.get('genre');
+        genre.get('books').then(function(books){
+          books.pushObject(model);
+          genre.save();
+          controller.transitionToRoute('index');
+        });
       });
     }
   }
